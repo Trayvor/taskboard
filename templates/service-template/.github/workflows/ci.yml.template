@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8
+        env:
+          MYSQL_ROOT_PASSWORD: rootpass
+          MYSQL_DATABASE: template_db
+        ports:
+          - 3306:3306
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Set environment variables for Spring Boot
+        run: |
+          echo "MYSQL_USERNAME=root" >> $GITHUB_ENV
+          echo "MYSQL_PASSWORD=rootpass" >> $GITHUB_ENV
+          echo "MYSQL_DB_NAME=template_db" >> $GITHUB_ENV
+          echo "JWT_SECRET=my-32-character-ultra-secure-and-ultra-long-secret" >> $GITHUB_ENV
+          echo "JWT_EXPIRATION=30000000" >> $GITHUB_ENV
+
+      - name: Check MySQL container status
+        run: |
+          docker ps -a
+
+      - name: Wait for MySQL to be ready
+        run: |
+          CONTAINER_ID=$(docker ps -q --filter "ancestor=mysql:8")
+          until docker exec $CONTAINER_ID mysqladmin --user=root --password=rootpass --host=localhost --port=3306 ping --silent; do
+            echo "Waiting for MySQL..."
+            sleep 10
+          done
+        continue-on-error: true
+
+      - name: Build and verify
+        run: mvn clean verify

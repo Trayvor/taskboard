@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 10-insert-roles-into-roles-table
+      author: vlad
+
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column: { name: role, value: "ROLE_ADMIN" }
+        - insert:
+            tableName: roles
+            columns:
+              - column: { name: role, value: "ROLE_USER" }
