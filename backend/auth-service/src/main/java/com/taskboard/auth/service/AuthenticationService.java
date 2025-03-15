@@ -8,5 +8,7 @@ import com.taskboard.auth.exception.RegistrationException;
 
 public interface AuthenticationService {
     UserLoginResponseDto authenticate(UserLoginRequestDto userLoginRequestDto);
-    UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto) throws RegistrationException;
+
+    UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
+            throws RegistrationException;
 }
