@@ -2,13 +2,12 @@ name: Service CI
 
 on:
   push:
-    paths:
-      - service/**  
-  pull_request:
-    paths:
-      - service/**
     branches:
-      - main  
+      - 'service/*'  
+  pull_request:
+    branches:
+      - 'main'  
+      - 'service/*'
       
 
 jobs:
