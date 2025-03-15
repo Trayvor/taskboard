@@ -59,12 +59,4 @@ jobs:
           cd backend/${GITHUB_REF##*/}
         fi
         mvn clean verify
-
-    - name: Run tests with Maven
-      run: |
-        if [[ -n "${GITHUB_HEAD_REF}" ]]; then
-            cd backend/${GITHUB_HEAD_REF##*/}
-        else
-          cd backend/${GITHUB_REF##*/}
-        fi
-        mvn test
+        
