@@ -2,13 +2,12 @@ name: Service CI
 
 on:
   push:
-    paths:
-      - service/**  
-  pull_request:
-    paths:
-      - service/**
     branches:
-      - main  
+      - 'service/*'  
+  pull_request:
+    branches:
+      - 'main'  
+      - 'service/*'
       
 
 jobs:
@@ -23,13 +22,7 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_PASSWORD }} 
           MYSQL_DATABASE: ci-database
-          MYSQL_USER: ${{ secrets.MYSQL_USERNAME }}
-          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-        options: >-
-          --health-cmd="mysqladmin ping --silent"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=5
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
     - name: Checkout repository
@@ -39,7 +32,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '21'
-        distribution: 'adoptopenjdk'
+        distribution: 'temurin'
 
     - name: Set environment variables
       run: |
@@ -58,16 +51,12 @@ jobs:
           sleep 5
         done
 
-    - name: Select service folder
-      run: |
+    - name: Build with Maven
+      run: | 
         if [[ -n "${GITHUB_HEAD_REF}" ]]; then
-          cd backend/${GITHUB_HEAD_REF##*/}
+            cd backend/${GITHUB_HEAD_REF##*/}
         else
           cd backend/${GITHUB_REF##*/}
         fi
-
-    - name: Build with Maven
-      run: mvn clean verify
-
-    - name: Run tests with Maven
-      run: mvn test
+        mvn clean verify
+        
