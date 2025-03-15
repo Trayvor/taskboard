@@ -1,7 +1,7 @@
 package com.taskboard.auth.dto;
 
-import java.util.Set;
 import com.taskboard.auth.model.Role;
+import java.util.Set;
 
 public record UserResponseDto(
         Long id,

@@ -1,11 +1,5 @@
 package com.taskboard.auth.service.impl;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
 import com.taskboard.auth.dto.UserLoginRequestDto;
 import com.taskboard.auth.dto.UserLoginResponseDto;
 import com.taskboard.auth.dto.UserRegistrationRequestDto;
@@ -16,6 +10,12 @@ import com.taskboard.auth.model.User;
 import com.taskboard.auth.repository.UserRepository;
 import com.taskboard.auth.security.JwtUtil;
 import com.taskboard.auth.service.AuthenticationService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +38,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto) throws RegistrationException {
+    public UserResponseDto register(UserRegistrationRequestDto userRegistrationRequestDto)
+            throws RegistrationException {
         if (userRepository.existsByEmail(userRegistrationRequestDto.email())) {
             throw new RegistrationException(
                     "User with email " + userRegistrationRequestDto.email() + " already exists"

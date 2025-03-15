@@ -1,9 +1,9 @@
 package com.taskboard.auth.dto;
 
+import com.taskboard.auth.annotation.FieldMatch;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import com.taskboard.auth.annotation.FieldMatch;
 
 @FieldMatch(first = "password", second = "repeatPassword", message = "Passwords must match")
 public record UserRegistrationRequestDto(

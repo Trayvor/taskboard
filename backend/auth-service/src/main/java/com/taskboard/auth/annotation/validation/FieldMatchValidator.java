@@ -1,10 +1,10 @@
 package com.taskboard.auth.annotation.validation;
 
+import com.taskboard.auth.annotation.FieldMatch;
+import com.taskboard.auth.exception.NoValidationFieldsException;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.BeanWrapperImpl;
-import com.taskboard.auth.annotation.FieldMatch;
-import com.taskboard.auth.exception.NoValidationFieldsException;
 
 public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Object> {
     private String firstFieldName;
