@@ -1,8 +1,8 @@
-package com.taskboard.auth.config;
+package com.taskboard.user.config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-import com.taskboard.auth.security.JwtAuthenticationFilter;
+import com.taskboard.user.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/auth/**", "/error",
+                                .requestMatchers("/error",
                                         "/swagger-ui/**", "/v3/api-docs/**")
                                 .permitAll()
                                 .anyRequest()

@@ -1,6 +1,6 @@
-package com.taskboard.auth.security;
+package com.taskboard.user.security;
 
-import com.taskboard.auth.repository.UserRepository;
+import com.taskboard.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

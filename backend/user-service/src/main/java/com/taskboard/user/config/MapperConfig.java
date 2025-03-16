@@ -1,4 +1,4 @@
-package com.taskboard.auth.config;
+package com.taskboard.user.config;
 
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.NullValueCheckStrategy;
