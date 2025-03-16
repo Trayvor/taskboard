@@ -1,6 +1,6 @@
-package com.taskboard.auth.model;
+package com.taskboard.user.model;
 
-import com.taskboard.auth.model.type.UserRole;
+import com.taskboard.user.model.type.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,10 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.springframework.security.core.GrantedAuthority;
 
-@Accessors(chain = true)
 @Getter
 @Setter
 @Entity
